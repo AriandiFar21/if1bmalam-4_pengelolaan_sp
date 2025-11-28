@@ -93,7 +93,7 @@ $jml_sp_aktif = $data_sp_aktif['total'];
                         <h2 class="fw-bold fs-5">Website Pengelolaan Surat Peringatan</h2>
                     </div>
                     <div class="text-end">
-                        <p class="mb-0">Halo, <?php echo $_SESSION['nama'] ?? 'Admin'; ?></p>
+                        <p class="mb-0">Halo, <?php echo $_SESSION['nim'] ?? 'Admin'; ?></p>
                         <p class="mb-0 small">Anda Login Sebagai Admin</p>
                     </div>
                 </div>
@@ -155,6 +155,8 @@ $jml_sp_aktif = $data_sp_aktif['total'];
             sidebar.classList.toggle("show");
         });
     </script>
+
+    <h1>Mungkin Takut Perbuhana</h1>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
