@@ -155,9 +155,6 @@ $jml_sp_aktif = $data_sp_aktif['total'];
             sidebar.classList.toggle("show");
         });
     </script>
-
-    <h1>Mungkin Takut Perbuhana</h1>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
