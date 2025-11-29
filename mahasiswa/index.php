@@ -14,7 +14,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'mahasiswa') {
 $nim_mahasiswa = $_SESSION['nim'];
 
 $sql = "SELECT * FROM sp WHERE nim_mahasiswa = '$nim_mahasiswa' ORDER BY tanggal_terbit DESC";
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($koneksi, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="id">

@@ -14,7 +14,7 @@ $id_sp = $_GET['id'];
 $nim_mahasiswa_session = $_SESSION['nim'];
 
 $sql = "SELECT * FROM sp WHERE id_sp = '$id_sp' AND nim_mahasiswa = '$nim_mahasiswa_session'";
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($koneksi, $sql);
 $sp = mysqli_fetch_assoc($result);
 
 // Cek jika data ditemukan
