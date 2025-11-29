@@ -1,0 +1,115 @@
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white !important;
+  border-radius: 8px;
+  transition: 0.3s;
+  margin-left: 10px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#hamburger {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #010825;
+  color: white;
+  transition: transform 0.4s ease-in-out;
+  z-index: 1000;
+}
+
+.content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.nav-link.active {
+  background-color: white;
+  color: black !important;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.nav-link {
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+}
+
+.content-wrapper {
+  width: 100%;
+  background-color: #f8f9fa;
+  overflow-y: auto;
+}
+
+.welcome-banner {
+  background-color: #010825;
+  color: white;
+  height: 150px;
+}
+
+.info-card {
+  background-color: #010825;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.info-card svg {
+  opacity: 0.8;
+}
+@media only screen and (max-width: 600px) {
+  #hamburger {
+    cursor: pointer;
+    display: block;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .content {
+    margin-left: 0;
+    padding-top: 70px;
+  }
+
+  .content-wrapper {
+    padding: 10px !important;
+  }
+
+  .welcome-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .welcome-banner div:first-child {
+    margin-bottom: 1rem;
+  }
+
+    h2 {
+      font-size: 1px;
+    }
+}
