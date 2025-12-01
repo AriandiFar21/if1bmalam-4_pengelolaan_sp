@@ -23,10 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["role"]     = $user["role"];
 
             if ($user['role'] == "staff_akademik") {
-                header("Location: ../admin/index.php");
+                echo "<script>alert('Berhasil Login Sebagai Staff Akademim'); window.location.href = '../admin/index.php';</script>";
                 exit;
             } else if ($user['role'] == "mahasiswa") {
-                header("Location: ../mahasiswa/index.php");
+                echo "<script>alert('Berhasil Login Sebagai Mahasiswa'); window.location.href = '../mahasiswa/index.php';</script>";
                 exit;
             }
         } else {
@@ -47,6 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../auth/login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <style>
+        body {
+            overflow: hidden;
+        }
+
         .baan {
             margin-left: 60px;
             width: auto;
@@ -117,16 +121,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan Password Anda" value="" required>
                                     </div>
                                     <div class="row mt-2">
-                                        <div class="col-12">
-                                            <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                                <a href="#!" class="link-secondary text-decoration-none fw-bold">Lupa Password??</a>
-                                            </div>
-                                        </div>
                                         <div class="col-12 mt-3">
                                             <button type="submit" class="btn btn-dark w-100 py-2 fw-bold" style="background-color:#010825;">
                                                 Masuk
                                             </button>
                                         </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
