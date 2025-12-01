@@ -52,7 +52,7 @@
               <a class="nav-link text-black fw-bold" href="#tentang-kami">Tentang</a>
             </li>
             <li class="nav-item me-3">
-              <a href="auth/index.php" class="btns btn btn-primary fw-bold">Login</a>
+              <a href="auth/login.php" class="btns btn btn-primary fw-bold">Login</a>
             </li>
           </ul>
         </div>

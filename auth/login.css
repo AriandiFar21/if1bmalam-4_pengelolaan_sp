@@ -1,0 +1,15 @@
+.container {
+  width: 79%;
+}
+
+.btn {
+  background-color: #010825;
+  color: white;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+}
