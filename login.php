@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION["role"]     = $user["role"];
 
       if ($user['role'] == "staff_akademik") {
-        header("Location: admin/dashboard_staff.php");
+        header("Location: admin/index.php");
         exit;
       } else if ($user['role'] == "mahasiswa") {
-        header("Location: mahasiswa/dashboard_mahasiswa.php");
+        header("Location: mahasiswa/index.php");
         exit;
       }
     } else {
@@ -137,5 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </section>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
+
 
 </html>
