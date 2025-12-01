@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["role"]     = $user["role"];
 
             if ($user['role'] == "staff_akademik") {
-                echo "<script>alert('Berhasil Login Sebagai Staff Akademim'); window.location.href = '../admin/index.php';</script>";
+                echo "<script>alert('Berhasil Login Sebagai Staff Akademik'); window.location.href = '../admin/index.php';</script>";
                 exit;
             } else if ($user['role'] == "mahasiswa") {
                 echo "<script>alert('Berhasil Login Sebagai Mahasiswa'); window.location.href = '../mahasiswa/index.php';</script>";

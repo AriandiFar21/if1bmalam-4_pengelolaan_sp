@@ -63,7 +63,7 @@ $no = 1;
       </li>
     </ul>
     <ul class="mt-auto">
-      <a href="../logout.php" type="button" class="btn btn-light fw-bold">LogOut</a>
+      <a href="../auth/logout.php" type="button" class="btn btn-light fw-bold">LogOut</a>
     </ul>
   </div>
 
