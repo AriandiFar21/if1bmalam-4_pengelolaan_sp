@@ -1,5 +1,3 @@
-proses/edit_user.php
-
 <?php
 session_start();
 include("../../koneksi.php");
