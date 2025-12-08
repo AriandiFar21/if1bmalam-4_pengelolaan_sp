@@ -114,7 +114,7 @@
         <div
           class="col-sm col-md-3 d-flex mt-4 mt-xl-0 justify-content-center">
           <div class="card" style="width: 18rem">
-            <img src="./FOTO/fariel 1.jpg" class="card-img-top" alt="..." />
+            <img src="./FOTO/fariel1.jpg" class="card-img-top" alt="..." />
             <div class="card-body">
               <h5 class="card-title fw-bold">Fariel Ariandi</h5>
               <p class="card-text fw-medium" style="color: #6236f5">
