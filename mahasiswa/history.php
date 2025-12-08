@@ -50,6 +50,9 @@ $result = mysqli_query($koneksi, $sql);
             <li class="nav-item">
                 <a class="nav-link active text-white fw-bold fs-6" href="history.php">History Surat Peringatan</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white fw-bold fs-6" href="ganti_password.php">Ganti Password</a>
+            </li>
         </ul>
         <ul class="mt-auto">
             <a href="../auth/logout.php" type="button" class="btn btn-light fw-bold">LogOut</a>
