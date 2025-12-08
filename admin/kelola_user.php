@@ -37,6 +37,7 @@ if (!$result) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -147,7 +148,7 @@ if (!$result) {
                         <form action="proses/edit_user.php" method="POST">
                           <div class="modal-body">
                             <input type="hidden" name="id" value="<?= $row['id']; ?>">
-                            
+
                             <label class="mt-2">NIM / ID Staff</label>
                             <input type="text" name="nim" class="form-control" value="<?= $row['nim']; ?>" required>
 
@@ -160,7 +161,7 @@ if (!$result) {
                             <label class="mt-2">Role</label>
                             <select name="role" class="form-select">
                               <option value="staff_akademik" <?= ($row['role'] == 'staff_akademik') ? 'selected' : '' ?>>staff akademik</option>
-                                <option value="mahasiswa" <?= ($row['role'] == 'mahasiswa') ? 'selected' : '' ?>>mahasiswa</option>
+                              <option value="mahasiswa" <?= ($row['role'] == 'mahasiswa') ? 'selected' : '' ?>>mahasiswa</option>
                             </select>
                           </div>
                           <div class="modal-footer">
@@ -215,9 +216,8 @@ if (!$result) {
 
             <label class="mt-2">Role</label>
             <select name="role" class="form-select">
-              <option value="admin">Admin</option>
               <option value="mahasiswa">Mahasiswa</option>
-              <option value="staff">Staff</option>
+              <option value="staff_akademik">Staff Akademik</option>
             </select>
           </div>
           <div class="modal-footer">
@@ -238,4 +238,5 @@ if (!$result) {
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
