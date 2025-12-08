@@ -197,7 +197,7 @@
               <a href="#" class="text-decoration-none text-white">Tentang</a>
             </li>
             <li>
-              <a href="login.html" class="text-decoration-none text-white">Login</a>
+              <a href="auth/login.php" class="text-decoration-none text-white">Login</a>
             </li>
           </ul>
         </div>
