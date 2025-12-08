@@ -1,46 +1,43 @@
-<!-- Tombol Tambah User -->
-<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahUser">
-    Tambah User
-</button>
+<?php
+include "../koneksi.php";
 
-<!-- Modal Tambah User -->
-<div class="modal fade" id="modalTambahUser" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      
-      <div class="modal-header">
-        <h5 class="modal-title">Tambah User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+// Cegah akses tanpa POST
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: kelola_user.php");
+    exit();
+}
 
-      <form action="tambah_user.php" method="POST">
-        <div class="modal-body">
+$nim      = $_POST['nim'];
+$nama     = $_POST['nama'];
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$role     = $_POST['role'];
 
-          <label>NIM / ID Staff</label>
-          <input type="text" name="nim" class="form-control" required>
+// Cek apakah user sudah ada
+$cek = mysqli_query($koneksi, "SELECT * FROM user WHERE nim='$nim'");
+if (mysqli_num_rows($cek) > 0) {
+    echo "<script>
+            alert('User sudah ada!');
+            window.location='kelola_user.php';
+          </script>";
+    exit();
+}
 
-          <label class="mt-3">Nama Lengkap</label>
-          <input type="text" name="nama" class="form-control" required>
+// Insert data
+$query = mysqli_query($koneksi,
+    "INSERT INTO user (nim, nama, password, role)
+     VALUES('$nim', '$nama', '$password', '$role')"
+);
 
-          <label class="mt-3">Password</label>
-          <input type="password" name="password" class="form-control" required>
-
-          <label class="mt-3">Role</label>
-          <select name="role" class="form-control" required>
-              <option value="Admin">Admin</option>
-              <option value="Dosen">Dosen</option>
-              <option value="Mahasiswa">Mahasiswa</option>
-          </select>
-
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-
-      </form>
-
-    </div>
-  </div>
-</div>
+// Jika berhasil
+if ($query) {
+    echo "<script>
+            alert('User berhasil ditambahkan!');
+            window.location='kelola_user.php';
+          </script>";
+} else {
+    echo "<script>
+            alert('Gagal menambahkan user!');
+            window.location='kelola_user.php';
+          </script>";
+}
+?>
