@@ -1,18 +1,18 @@
 <?php
 include '../koneksi.php';
 
-if (!isset($_GET['nim'])) {
+if (!isset($_GET['id'])) {
     die("NIM tidak ditemukan!");
 }
 
-$nim = $_GET['nim'];
+$id = $_GET['id'];
 
-$sql = "DELETE FROM user WHERE nim = '$nim'";
+$sql = "DELETE FROM user WHERE id = '$id'";
 
 if (mysqli_query($koneksi, $sql)) {
     echo "<script>
         alert('User berhasil dihapus!');
-        window.location='user.php';
+        window.location='kelola_user.php';
     </script>";
 } else {
     echo "Gagal menghapus: " . mysqli_error($koneksi);
