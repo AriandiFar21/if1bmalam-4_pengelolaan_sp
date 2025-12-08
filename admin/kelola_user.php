@@ -6,21 +6,20 @@ include("../koneksi.php");
 $search = isset($_GET['search']) ? mysqli_real_escape_string($koneksi, $_GET['search']) : "";
 
 // --- PAGINATION ---
-$limit = 15; // jumlah data per halaman
+$limit = 15;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = ($page - 1) * $limit;
 
-// Hitung total data (untuk pagination)
+// Hitung total data
 $sqlCount = "SELECT COUNT(*) AS total FROM user 
              WHERE nim LIKE '%$search%' 
              OR nama LIKE '%$search%' 
              OR role LIKE '%$search%'";
 $execCount = mysqli_query($koneksi, $sqlCount);
 $total_data = mysqli_fetch_assoc($execCount)['total'];
-
 $total_page = ceil($total_data / $limit);
 
-// Query utama untuk mengambil data user
+// Query utama
 $sql = "SELECT * FROM user 
         WHERE nim LIKE '%$search%' 
         OR nama LIKE '%$search%' 
@@ -32,7 +31,7 @@ $result = mysqli_query($koneksi, $sql);
 $no = $start + 1;
 
 if (!$result) {
-    die("Query Error: " . mysqli_error($koneksi));
+  die("Query Error: " . mysqli_error($koneksi));
 }
 ?>
 
@@ -51,7 +50,6 @@ if (!$result) {
 <body>
   <i id="hamburger" class="bi bi-list fs-4 text-black"></i>
 
-  <!-- SIDEBAR -->
   <div id="sidebar" class="sidebar d-flex flex-column">
     <div class="row">
       <div class="col-3 mt-2">
@@ -80,7 +78,6 @@ if (!$result) {
     </ul>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
     <div class="container-fluid">
       <div class="content-wrapper p-4">
@@ -95,22 +92,19 @@ if (!$result) {
           </div>
         </div>
 
-        <!-- BUTTON TAMBAH USER -->
         <div class="mt-3">
           <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalTambahUser">
             Tambah User +
           </button>
         </div>
 
-        <!-- TABLE USER -->
-        <div class="table-responsive mt-3">
-            <!-- SEARCH -->
-<form method="GET" class="mt-3 d-flex" style="max-width: 300px;">
-  <input type="text" name="search" class="form-control" placeholder="Cari user..." value="<?= $search ?>">
-  <button class="btn btn-dark ms-2">Cari</button>
-</form>
+        <div class="table-responsive">
+          <form method="GET" class="mt-3 d-flex" style="max-width: 300px;">
+            <input type="text" name="search" class="form-control" placeholder="Cari user..." value="<?= $search ?>">
+            <button class="btn btn-dark ms-2">Cari</button>
+          </form>
 
-          <table class="table table-striped table-bordered align-middle text-center">
+          <table class="mt-4 table table-striped table-bordered align-middle text-center">
             <thead class="table-dark">
               <tr>
                 <th>No</th>
@@ -118,36 +112,32 @@ if (!$result) {
                 <th>Nama Lengkap</th>
                 <th>Password</th>
                 <th>Role</th>
-                <th>Status</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-
-              <?php
-              if (mysqli_num_rows($result) > 0) {
+              <?php if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) { ?>
                   <tr>
                     <td><?= $no++; ?></td>
                     <td><?= $row['nim']; ?></td>
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['password']; ?></td>
-                    <td><?= $row['role']; ?></td>
                     <td>
-                      <?php if ($row['status'] == 'Aktif') { ?>
-                        <span class="badge bg-success">Aktif</span>
-                      <?php } else { ?>
-                        <span class="badge bg-secondary">Tidak Aktif</span>
-                      <?php } ?>
+                      <?php ?>
+                      <?php if ($row['role'] == 'staff_akademik') { ?>
+                        <span class="badge bg-primary">Staff Akademik</span>
+                      <?php } elseif ($row['role'] == 'mahasiswa') { ?>
+                        <span class="badge bg-success">Mahasiswa</span>
+                      <?php
+                      } ?>
                     </td>
                     <td class="d-flex gap-2 justify-content-center">
                       <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row['id']; ?>">Edit</button>
-                      <a href="proses/hapus_user.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger"
-                        onclick="return confirm('Yakin ingin menghapus user ini?');">Hapus</a>
+                      <a href="hapus_user.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus user ini?');">Hapus</a>
                     </td>
                   </tr>
 
-                  <!-- MODAL EDIT USER -->
                   <div class="modal fade" id="modalEdit<?= $row['id']; ?>" tabindex="-1">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -155,7 +145,6 @@ if (!$result) {
                           <h5 class="modal-title">Edit User</h5>
                           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
-
                         <form action="proses/edit_user.php" method="POST">
                           <div class="modal-body">
                             <input type="hidden" name="id" value="<?= $row['id']; ?>">
@@ -171,61 +160,42 @@ if (!$result) {
 
                             <label class="mt-2">Role</label>
                             <select name="role" class="form-select">
-                              <option value="admin" <?= ($row['role'] == 'admin') ? 'selected' : '' ?>>Admin</option>
-                              <option value="mahasiswa" <?= ($row['role'] == 'mahasiswa') ? 'selected' : '' ?>>Mahasiswa</option>
-                              <option value="staff" <?= ($row['role'] == 'staff') ? 'selected' : '' ?>>Staff</option>
+                              <option value="staff_akademik" <?= ($row['role'] == 'staff_akademik') ? 'selected' : '' ?>>staff akademik</option>
+                              <option value="mahasiswa" <?= ($row['role'] == 'mahasiswa') ? 'selected' : '' ?>>mahasiswa</option>
                             </select>
-
-                            <label class="mt-2">Status</label>
-                            <select name="status" class="form-select">
-                              <option value="Aktif" <?= ($row['status'] == 'Aktif') ? 'selected' : '' ?>>Aktif</option>
-                              <option value="Tidak Aktif" <?= ($row['status'] == 'Tidak Aktif') ? 'selected' : '' ?>>Tidak Aktif</option>
-                            </select>
-
                           </div>
                           <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button class="btn btn-primary">Simpan Perubahan</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" name="update" class="btn btn-primary">Simpan Perubahan</button>
                           </div>
                         </form>
                       </div>
                     </div>
                   </div>
-
-              <?php }
+                <?php }
               } else { ?>
                 <tr>
-                  <td colspan="7" class="text-center">Tidak ada user ditemukan.</td>
+                  <td colspan="6" class="text-center">Tidak ada user ditemukan.</td>
                 </tr>
               <?php } ?>
-
             </tbody>
           </table>
-          <!-- PAGINATION -->
-<nav>
-  <ul class="pagination justify-content-center">
 
-    <!-- PREV -->
-    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-      <a class="page-link"
-        href="?page=<?= $page - 1 ?>&search=<?= $search ?>">Prev</a>
-    </li>
-
-    <!-- NEXT -->
-    <li class="page-item <?= ($page >= $total_page) ? 'disabled' : '' ?>">
-      <a class="page-link"
-        href="?page=<?= $page + 1 ?>&search=<?= $search ?>">Next</a>
-    </li>
-
-  </ul>
-</nav>
-
+          <nav>
+            <ul class="pagination justify-content-center">
+              <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page - 1 ?>&search=<?= $search ?>">Prev</a>
+              </li>
+              <li class="page-item <?= ($page >= $total_page) ? 'disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page + 1 ?>&search=<?= $search ?>">Next</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL TAMBAH USER -->
   <div class="modal fade" id="modalTambahUser" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -233,10 +203,8 @@ if (!$result) {
           <h5 class="modal-title">Tambah User Baru</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
-
-        <form action="proses/tambah_user.php" method="POST">
+        <form action="tambah_user.php" method="POST">
           <div class="modal-body">
-
             <label class="mt-2">NIM / ID Staff</label>
             <input type="text" name="nim" class="form-control" required>
 
@@ -248,24 +216,15 @@ if (!$result) {
 
             <label class="mt-2">Role</label>
             <select name="role" class="form-select">
-              <option value="admin">Admin</option>
               <option value="mahasiswa">Mahasiswa</option>
-              <option value="staff">Staff</option>
+              <option value="staff_akademik">Staff Akademik</option>
             </select>
-
-            <label class="mt-2">Status</label>
-            <select name="status" class="form-select">
-              <option value="Aktif">Aktif</option>
-              <option value="Tidak Aktif">Tidak Aktif</option>
-            </select>
-
           </div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button class="btn btn-primary">Tambah User</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Tambah User</button>
           </div>
         </form>
-
       </div>
     </div>
   </div>
@@ -277,7 +236,7 @@ if (!$result) {
       sidebar.classList.toggle("show");
     });
   </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Cek login
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'staff_akademik') {
     header("Location: ../index.php");
     exit();
@@ -25,7 +24,7 @@ $query_sp = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sp");
 $data_sp = mysqli_fetch_assoc($query_sp);
 $jml_sp = $data_sp['total'];
 
-// 4. Hitung SP yang Masih Aktif (Bonus Info)
+// 4. Hitung SP yang Masih Aktif
 $query_sp_aktif = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM sp WHERE status = 'Aktif'");
 $data_sp_aktif = mysqli_fetch_assoc($query_sp_aktif);
 $jml_sp_aktif = $data_sp_aktif['total'];
