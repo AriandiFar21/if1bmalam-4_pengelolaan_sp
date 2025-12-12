@@ -20,7 +20,7 @@ include "../koneksi.php";
     <!-- Tabel User -->
     <table class="table table-bordered">
         <thead class="table-dark">
-            <tr>
+            <tr>  
                 <th>NIM/ID Staff</th>
                 <th>Nama</th>
                 <th>Role</th>
