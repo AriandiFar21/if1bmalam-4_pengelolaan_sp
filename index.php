@@ -19,6 +19,102 @@
     rel="stylesheet" />
 </head>
 
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .btn {
+    width: 100px;
+    height: 35px;
+  }
+
+  .hero-section {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 100px;
+  }
+
+  .hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #192a56;
+    z-index: -1;
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero {
+    background-color: #192a56;
+    width: 100%;
+    height: 300px;
+  }
+
+  .btns {
+    width: 100px;
+    height: 35px;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #212529;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+
+  .illustration-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  footer {
+    background-color: #192a56;
+    color: #fff;
+    padding: 3rem 0;
+  }
+
+  .social-icons a {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 991.98px) {
+    body {
+      overflow: scroll;
+    }
+
+    .hero-section {
+      text-align: center;
+      min-height: auto;
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+      margin-top: 0;
+    }
+
+    .hero-section::before {
+      display: none;
+    }
+
+    .hero-content {
+      padding-bottom: 3rem;
+    }
+
+    .hero-content h1 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -67,7 +163,7 @@
           <h1>Website Pengelolaan Surat Peringatan Mahasiswa</h1>
           <p class="mt-3">
             Mudah, cepat, dan transparan dalam pengelolaan
-            <span class="text-white">surat peringatan.</span>
+            surat peringatan.
           </p>
         </div>
 

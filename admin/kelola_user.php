@@ -74,8 +74,12 @@ if (!$result) {
       </li>
     </ul>
     <ul class="mt-auto">
-      <a href="../logout.php" type="button" class="btn btn-light fw-bold">LogOut</a>
+      <button type="button" class="btn btn-light fw-bold" data-bs-toggle="modal" data-bs-target="#modalLogout">
+        LogOut
+      </button>
     </ul>
+
+
   </div>
 
   <div class="content">
@@ -225,6 +229,24 @@ if (!$result) {
             <button type="submit" class="btn btn-primary">Tambah User</button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLogoutLabel">Konfirmasi</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Apakah Anda yakin ingin logout?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <a href="../auth/logout.php" class="btn btn-danger">Ya, Logout</a>
+        </div>
       </div>
     </div>
   </div>
