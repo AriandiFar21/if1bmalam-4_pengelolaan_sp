@@ -21,12 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["nim"]      = $user["nim"];
             $_SESSION["nama"]     = $user["nama"];
             $_SESSION["role"]     = $user["role"];
+            $_SESSION["kelas"]     = $user["kelas"];
 
             if ($user['role'] == "staff_akademik") {
                 echo "<script>alert('Berhasil Login Sebagai Staff Akademik'); window.location.href = '../admin/index.php';</script>";
                 exit;
             } else if ($user['role'] == "mahasiswa") {
                 echo "<script>alert('Berhasil Login Sebagai Mahasiswa'); window.location.href = '../mahasiswa/index.php';</script>";
+                exit;
+            } else if ($user['role'] == "dosen") {
+                echo "<script>alert('Berhasil Login Sebagai Dosen'); window.location.href = '../dosen/index.php';</script>";
                 exit;
             }
         } else {
@@ -109,6 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <select class="form-select" name="role" required>
                                             <option value="" selected disabled>Pilih Role Kamu</option>
                                             <option value="staff_akademik">Staff Akademik</option>
+                                            <option value="dosen">Dosen</option>
                                             <option value="mahasiswa">Mahasiswa</option>
                                         </select>
                                     </div>

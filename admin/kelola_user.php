@@ -2,7 +2,6 @@
 session_start();
 include("../koneksi.php");
 
-// --- SEARCH ---
 $search = isset($_GET['search']) ? mysqli_real_escape_string($koneksi, $_GET['search']) : "";
 
 // --- PAGINATION ---
@@ -133,6 +132,8 @@ if (!$result) {
                         <span class="badge bg-primary">Staff Akademik</span>
                       <?php } elseif ($row['role'] == 'mahasiswa') { ?>
                         <span class="badge bg-success">Mahasiswa</span>
+                      <?php  } elseif ($row['role'] == 'dosen') { ?>
+                        <span class="badge bg-info">Dosen</span>
                       <?php
                       } ?>
                     </td>

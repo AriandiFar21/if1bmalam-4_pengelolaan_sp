@@ -1,0 +1,123 @@
+/* =========================================
+       CSS DARI REFERENSI KAMU (DIGABUNGKAN)
+       ========================================= */
+body {
+  overflow-x: hidden;
+  background-color: #f4f6f9;
+  /* Tambahan agar background tidak putih polos */
+}
+
+/* Sidebar Styling */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #010825;
+  /* Warna sesuai referensi */
+  color: white;
+  transition: transform 0.4s ease-in-out;
+  z-index: 1000;
+}
+
+/* Nav Link Styling */
+.nav-link {
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  color: white;
+  /* Default text white */
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white !important;
+  border-radius: 8px;
+  transition: 0.3s;
+  margin-left: 10px;
+}
+
+.nav-link.active {
+  background-color: white;
+  color: black !important;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* Hamburger Menu */
+#hamburger {
+  display: none;
+}
+
+/* Content Area */
+.content {
+  margin-left: 250px;
+  padding: 20px;
+  transition: margin-left 0.4s ease-in-out;
+}
+
+.content-wrapper {
+  width: 100%;
+  background-color: #f8f9fa;
+  /* Background area konten */
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+/* Welcome Banner */
+.welcome-banner {
+  background-color: #010825;
+  color: white;
+  min-height: 150px;
+  /* Pakai min-height agar fleksibel */
+}
+
+/* Responsive Logic (Max-width 600px sesuai referensi) */
+@media only screen and (max-width: 600px) {
+  #hamburger {
+    cursor: pointer;
+    display: block;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .content {
+    margin-left: 0;
+    padding-top: 70px;
+  }
+
+  .content-wrapper {
+    padding: 10px !important;
+  }
+
+  .welcome-banner {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .welcome-banner div:first-child {
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
