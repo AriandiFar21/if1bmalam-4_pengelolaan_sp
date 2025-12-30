@@ -11,6 +11,7 @@ $nim      = $_POST['nim'];
 $nama     = $_POST['nama'];
 $password = $_POST['password'];
 $role     = $_POST['role'];
+$kelas     = $_POST['kelas'];
 
 // Cek apakah user sudah ada
 $cek = mysqli_query($koneksi, "SELECT * FROM user WHERE nim='$nim'");
@@ -25,8 +26,8 @@ if (mysqli_num_rows($cek) > 0) {
 // Insert data
 $query = mysqli_query(
   $koneksi,
-  "INSERT INTO user (nim, nama, password, role)
-     VALUES('$nim', '$nama', '$password', '$role')"
+  "INSERT INTO user (nim, nama, password, role, kelas)
+     VALUES('$nim', '$nama', '$password', '$role', '$kelas')"
 );
 
 // Jika berhasil

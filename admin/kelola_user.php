@@ -13,7 +13,8 @@ $start = ($page - 1) * $limit;
 $sqlCount = "SELECT COUNT(*) AS total FROM user 
              WHERE nim LIKE '%$search%' 
              OR nama LIKE '%$search%' 
-             OR role LIKE '%$search%'";
+             OR role LIKE '%$search%'
+             OR kelas LIKE '%$search%'";
 $execCount = mysqli_query($koneksi, $sqlCount);
 $total_data = mysqli_fetch_assoc($execCount)['total'];
 $total_page = ceil($total_data / $limit);
@@ -23,6 +24,7 @@ $sql = "SELECT * FROM user
         WHERE nim LIKE '%$search%' 
         OR nama LIKE '%$search%' 
         OR role LIKE '%$search%' 
+        OR kelas LIKE '%$search%'  
         ORDER BY id DESC 
         LIMIT $start, $limit";
 
@@ -115,6 +117,7 @@ if (!$result) {
                 <th>Nama Lengkap</th>
                 <th>Password</th>
                 <th>Role</th>
+                <th>Kelas</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -137,6 +140,7 @@ if (!$result) {
                       <?php
                       } ?>
                     </td>
+                    <td><?= $row['kelas']; ?></td>
                     <td class="d-flex gap-2 justify-content-center">
                       <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row['id']; ?>">Edit</button>
                       <a href="hapus_user.php?id=<?= $row['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Hapus user ini?');">Hapus</a>
@@ -165,13 +169,26 @@ if (!$result) {
 
                             <label class="mt-2">Role</label>
                             <select name="role" class="form-select">
-                              <option value="staff_akademik" <?= ($row['role'] == 'staff_akademik') ? 'selected' : '' ?>>staff akademik</option>
-                              <option value="mahasiswa" <?= ($row['role'] == 'mahasiswa') ? 'selected' : '' ?>>mahasiswa</option>
+                              <option value="staff_akademik" <?= ($row['role'] == 'staff_akademik') ? 'selected' : '' ?>>Staff Akademik</option>
+                              <option value="dosen" <?= ($row['role'] == 'dosen') ? 'selected' : '' ?>>Dosen</option>
+                              <option value="mahasiswa" <?= ($row['role'] == 'mahasiswa') ? 'selected' : '' ?>>Mahasiswa</option>
                             </select>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" name="update" class="btn btn-primary">Simpan Perubahan</button>
+
+                            <label class="mt-2">Kelas (Kosongkan jika Staff)</label>
+                            <select name="kelas" class="form-select">
+                              <option value="">-- Pilih Kelas --</option>
+
+                              <option value="IF-1APagi" <?= ($row['kelas'] == 'IF-1APagi') ? 'selected' : '' ?>>IF-1A (Pagi)</option>
+                              <option value="IF-1BMalam" <?= ($row['kelas'] == 'IF-1BMalam') ? 'selected' : '' ?>>IF-1B (Malam)</option>
+
+                              <option value="IF-2APagi" <?= ($row['kelas'] == 'IF-2A') ? 'selected' : '' ?>>IF-2A (Pagi)</option>
+                              <option value="IF-2BMalam" <?= ($row['kelas'] == 'IF-2B') ? 'selected' : '' ?>>IF-2B (Malam)</option>
+                            </select>
+
+                            <div class="modal-footer mt-3">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                              <button type="submit" name="update" class="btn btn-primary">Simpan Perubahan</button>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -219,11 +236,26 @@ if (!$result) {
             <label class="mt-2">Password</label>
             <input type="text" name="password" class="form-control" required>
 
-            <label class="mt-2">Role</label>
-            <select name="role" class="form-select">
-              <option value="mahasiswa">Mahasiswa</option>
-              <option value="staff_akademik">Staff Akademik</option>
-            </select>
+            <div class="mt-3">
+              <label>Role Pengguna</label>
+              <select name="role" id="pilihRole" class="form-select" onchange="cekRole()">
+                <option value="mahasiswa">Mahasiswa</option>
+                <option value="dosen">Dosen</option>
+                <option value="staff_akademik">Staff Akademik</option>
+              </select>
+            </div>
+
+            <div class="mt-3" id="blokKelas">
+              <label>Kelas / Kelas Wali</label>
+              <select name="kelas" id="inputKelas" class="form-select" required>
+                <option value="">-- Pilih Kelas --</option>
+                <option value="IF-1APagi">IF-1A (Pagi)</option>
+                <option value="IF-1BMalam">IF-1B (Malam)</option>
+                <option value="IF-2APagi">IF-2A (Pagi)</option>
+                <option value="IF-2BMalam">IF-2B (Malam)</option>
+              </select>
+            </div>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -251,6 +283,27 @@ if (!$result) {
       </div>
     </div>
   </div>
+
+  <script>
+    function cekRole() {
+      // Ambil elemen role dan blok kelas
+      var role = document.getElementById("pilihRole").value;
+      var blokKelas = document.getElementById("blokKelas");
+      var inputKelas = document.getElementById("inputKelas");
+
+      if (role === "staff_akademik") {
+        // Jika Staff: Sembunyikan kolom kelas & Hapus kewajiban 'required'
+        blokKelas.style.display = "none";
+        inputKelas.removeAttribute("required");
+        inputKelas.value = ""; // Reset pilihan biar kosong
+      } else {
+        // Jika Dosen/Mhs: Munculkan kolom kelas & Pasang 'required'
+        blokKelas.style.display = "block";
+        inputKelas.setAttribute("required", "required");
+      }
+    }
+    cekRole();
+  </script>
 
   <script>
     const hamburger = document.getElementById("hamburger");
